@@ -14,3 +14,6 @@ https://github.com/khatwaniNikhil/algo_grind/blob/main/FileDirectory-DesignChall
 1. https://leetcode.com/problems/evaluate-division/
 2. https://leetcode.com/discuss/interview-question/1450835/currency-conversion-need-javascript-solution
 
+#### count-possible-decodings-given-digit-sequence
+https://www.geeksforgeeks.org/count-possible-decodings-given-digit-sequence/
+https://github.com/khatwaniNikhil/ds_algo/blob/main/getPossibleDecodedPattern.java
