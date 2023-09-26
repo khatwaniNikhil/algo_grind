@@ -17,3 +17,7 @@ https://github.com/khatwaniNikhil/algo_grind/blob/main/FileDirectory-DesignChall
 #### count-possible-decodings-given-digit-sequence
 https://www.geeksforgeeks.org/count-possible-decodings-given-digit-sequence/
 https://github.com/khatwaniNikhil/ds_algo/blob/main/getPossibleDecodedPattern.java
+
+#### Max_Profit_in_Job_Scheduling
+https://medium.com/algorithm-and-datastructure/maximum-profit-in-job-scheduling-aeb2cc0caa39
+https://github.com/khatwaniNikhil/ds_algo/blob/main/Max_Profit_in_Job_Scheduling.md
