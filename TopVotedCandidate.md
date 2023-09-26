@@ -1,4 +1,4 @@
-# Approach
+# logic
 1. store only leader change data: Map<Integer, 
     tx leader1
     ty leader0
@@ -20,6 +20,9 @@ iterate
         changeLeader event 
         inc change count
 
+# Approach1
+
+```
 class TopVotedCandidate {
     private final int[] time;
     private final int[] leader;
@@ -83,3 +86,63 @@ class TopVotedCandidate {
         }
     }
 }
+```
+
+# Approach2
+```
+class TopVotedCandidate {
+
+    /** tracks leading person after counting ith vote */
+    int[] leaders;
+
+    /** tracks casting time of ith vote */
+    int[] times;
+
+    public TopVotedCandidate(int[] persons, int[] times) {
+        this.times = times;
+        this.leaders = new int[persons.length];
+
+        Map<Integer, Integer> voteCounter = new HashMap<>();
+        int max = -1;
+        int person = -1;
+        for(int v=0;v<persons.length;++v) {
+            int p = persons[v];
+            int totalVotesForPerson = voteCounter.getOrDefault(p,0)+1;
+            if (totalVotesForPerson>=max) {
+                max = totalVotesForPerson;
+                person = p;
+            }
+            voteCounter.put(p,totalVotesForPerson);
+            leaders[v] = person;
+        }
+    }
+    
+    public int q(int t) {
+        int v = getVotesCastedForTime(t);
+        return leaders[v];
+    }
+
+    private int getVotesCastedForTime(int t) {
+        int s=0;
+        int e=times.length-1;
+
+        while(s<=e) {
+            int m = s+(e-s)/2;
+            if(times[m]==t) {
+                return m;
+            } else if(times[m]>t) {
+                e = m-1;
+            } else {
+                s = m+1;
+            }
+        }
+        return e;
+    }
+}
+
+/**
+ * Your TopVotedCandidate object will be instantiated and called as such:
+ * TopVotedCandidate obj = new TopVotedCandidate(persons, times);
+ * int param_1 = obj.q(t);
+ */
+```
