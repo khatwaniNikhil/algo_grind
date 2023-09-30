@@ -10,11 +10,11 @@
 	RECURSIVELY SOLVE USING SUBPROBLEMS & STORE in dp[] 
 
 # Tabularization
-DP array init with -1 as values
-BASE CASE -- STORE ANSWERS IN dp[]
-ITERATE from: index after base case till: n
-build dp[i] using previous solved subproblems
-return dp[n] 
+1. DP array init with -1 as values
+2. BASE CASE -- STORE ANSWERS IN dp[]
+3. ITERATE from: index after base case till: n
+4. build dp[i] using previous solved subproblems
+5. return dp[n] 
 
 # space optimized Tabularization 
     check if can avoid storing all subproblems results
