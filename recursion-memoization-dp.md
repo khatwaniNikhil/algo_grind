@@ -19,7 +19,9 @@
 # space optimized Tabularization 
     check if can avoid storing all subproblems results
 
-# greedy versus dynamic https://www.baeldung.com/cs/greedy-approach-vs-dynamic-programming
+# greedy versus dynamic 
+https://www.baeldung.com/cs/greedy-approach-vs-dynamic-programming
+
 ## greedy
 decision is made on the basis of current information only
 need to establish before proceeding that local optimality leads to an optimal global solution
@@ -30,23 +32,41 @@ gives optimal solution
 requires more space at times to store the intermediate states in dp[]
 
 # DP Problems
-#### stairs climb https://www.enjoyalgorithms.com/blog/climbing-stairs-problem
-dp - similar to fibbonacci series but after i=3
+## 1. stairs climb 
+https://www.enjoyalgorithms.com/blog/climbing-stairs-problem
+### dp approach - similar to fibbonacci series but after i=3
+```
 dp[0] = 0
 dp[1] = 1
 dp[2] = 2
 i>=3 till n-1
 dp[i] = dp[i-1]+ dp[i-2];
 return dp[n-1]
-space optimised dp - keep only last two values
+```
+### space optimised dp - keep only last two values
+```
 if(n<=2)
-     return n;  else {      int prev = 2;      int prev2 = 1;      for(int i=3;i<=n;i++){          int cur_i = prev + prev2;          prev2 = prev;          prev = cur_i;      }      return prev;  } 
+     return n;
+else {
+int prev = 2;
+int prev2 = 1;
+for(int i=3;i<=n;i++)
+{
+	int cur_i = prev + prev2;
+	prev2 = prev;
+	prev = cur_i;
+}
+return prev;
+} 
+```
 
-frog energy spent - frog jump 1 or 2, min energy spent cost to reach destination
+## 2. frog energy spent - frog jump 1 or 2, min energy spent cost to reach destination
 https://www.codingninjas.com/studio/problems/frog-jump_3621012 
-Greedy not applicable
+
+### Greedy not applicable
 local optima does not guarantee global optima(some jumps can be low cost but now restricted on next jumps to take which might increase overall cost of the path)
-recursive - refer recursion(with memoziation) tricks first and then later convert to tabulization 
+#### recursive - refer recursion(with memoziation) tricks first and then later convert to tabulization 
+```
 Try to represent the given problem in terms of index. 
 F(n): min energy spent to reach from step 0 to step n. 
 F(0) = 0 
@@ -57,7 +77,10 @@ if n>=2
 jumpTwoCost  =  f(n-2) + abs(h[n-2], h[n])   
 Take the minimum of all the choices  
 return min(jumpOneCost, jumpTwoCost) recursive to dp  
-Recursive + memoization 
+```
+
+#### Recursive + memoization 
+```
 int dp[]=new int[n]
 Arrays.fill(dp,-1);
 dp[0]=0;
@@ -78,9 +101,10 @@ jumpOneCost 
 jumpTwoCost 
 dp[ind] = Math.min(jumpOneCost, jumpTwoCost) 
 Return dp[n-1]
-space optimised dp 
+```
 
-  
+#### space optimised dp 
+```
 int n=height.length;
    int prev=0;
   int prev2=0;
@@ -94,6 +118,9 @@ int n=height.length;
       int cur_i=Math.min(jumpOne, jumpTwo);
       prev2=prev;
       prev=cur_i;
+}
+```
         
-  } https://takeuforward.org/data-structure/dynamic-programming-frog-jump-with-k-distances-dp-4/  
+## 3. dynamic-programming-frog-jump-with-k-distances-dp-4
+https://takeuforward.org/data-structure/dynamic-programming-frog-jump-with-k-distances-dp-4/  
  
