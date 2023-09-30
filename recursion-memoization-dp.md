@@ -122,5 +122,134 @@ int n=height.length;
 ```
         
 ## 3. dynamic-programming-frog-jump-with-k-distances-dp-4
-https://takeuforward.org/data-structure/dynamic-programming-frog-jump-with-k-distances-dp-4/  
- 
+https://takeuforward.org/data-structure/dynamic-programming-frog-jump-with-k-distances-dp-4/
+```
+class Solution {
+   public int minEnergy(int arr[], int N, int K) {
+	int[] dp = new int[N];
+	Arrays.fill(dp, -1);
+	dp[0] = 0;
+	
+	for(int i=1;i<N;i++) {
+		int minEnergy = Integer.MAX_VALUE;
+	
+		for(int jumpSteps=1; jumpSteps<=K; jumpSteps++) {
+			
+			if(i-jumpSteps>0){
+				 int jumpCost = dp[i-jumpSteps] + Math.abs(arr[i], arr[i-jumpSteps]);
+				 minEnergy  = Math.min(minEnergy, jumpCost);
+			}
+		
+		}
+		dp[i] = minEnergy;
+	}
+	return dp[N-1];
+   }
+
+}
+```
+
+## 4. climbing-stairs
+https://leetcode.com/problems/climbing-stairs/description/
+```
+class Solution {
+    public int climbStairs(int n) {
+        // 1 <= n <= 45
+        // dp[n] = dp[n-1] + dp[n-2]
+        // base cases:
+        // dp[0] = 0
+        // dp[1] = 1
+        // dp[2] = 2
+        if(n<=2)
+            return n;
+        else {
+            int prev = 2;
+            int prev2 = 1;
+            for(int i=3;i<=n;i++){
+                int cur_i = prev + prev2;
+                prev2 = prev;
+                prev = cur_i;
+            }
+            return prev;
+        }
+    }
+}
+```
+
+## 5. https://practice.geeksforgeeks.org/problems/geek-jump/1
+```
+class Solution{
+    public int minimumEnergy(int arr[],int N){
+        int dp[] = new int[N];
+        Arrays.fill(dp, -1);
+        dp[0] = 0;
+        
+        for(int i=1;i<N;i++) {
+            int jumpTwoCost = Integer.MAX_VALUE;
+            //jumpOneCost
+            int jumpOneCost = dp[i-1] + Math.abs(arr[i] - arr[i-1]);    
+            
+            //jumpTwoCost
+            if(i>=2) {
+                jumpTwoCost = dp[i-2] + Math.abs(arr[i] - arr[i-2]);    
+            }
+            dp[i] = Math.min(jumpOneCost, jumpTwoCost);
+        }
+        return dp[N-1];
+    }
+}
+```
+
+##
+Printing Subsequences(contigous as well as non contiguous)
+elements order has to be maintained
+
+public static void main(String[] args) {
+    int[] nums = {1,2,3};
+    List<List<Integer>> result=new ArrayList<>();
+    printAllSubSequencesInternal(result,0,nums,new ArrayList<>());
+    for(List<Integer> subSeq:result) {
+        System.out.println(subSeq);
+    }
+}
+
+public static void printAllSubSequencesInternal(List<List<Integer>> result, int startIndex, int[] arr, List<Integer> currSubSequence) {
+    // base case index>=n, return current element
+    if(startIndex == arr.length) {
+        result.add(new ArrayList<>(currSubSequence));
+        return;
+    }
+    // // pick current and then solve subproblems
+    currSubSequence.add(arr[startIndex]);
+    printAllSubSequencesInternal(result, startIndex+1, arr, currSubSequence);
+
+    // // not pick current and then solve subproblems
+    currSubSequence.remove(currSubSequence.size()-1);
+    printAllSubSequencesInternal(result, startIndex+1, arr, currSubSequence);
+
+}
+Maximum sum of non-adjacent elements
+//base case i==0
+dp[0] = arr[0];
+
+for(int i=1;
+
+
+//pick current elem, then can’t pick adjacent and solve i-2 subproblem
+if(i>1)
+pick = arr[i] + call(i-2)
+
+// do not pick current elem, solve i-1 subproblem
+not_pick = 0+call(i-1)
+
+return max(pick, not_pick)
+
+
+
+
+
+
+
+
+
+
