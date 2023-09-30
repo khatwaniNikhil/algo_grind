@@ -1,22 +1,47 @@
-# Recursion tricks 
-1. Try to represent the given problem in terms of index.
-2. Do all possible operations on that index according to the problem statement.
-3. To count all possible ways - sum of all stuff.
+# Recursion
+https://takeuforward.org/recursion/introduction-to-recursion-understand-recursion-by-printing-something-n-times/
+1. function calls itself, can be described pictorically in tree format known as recursion tree.
+2. base condition leads to stack unwinding and return to previous call.
+3. can be implemented as
+    1. parameterised recursion(extra param to store/calculate the output)
+    2. functional recursion(calls self with modified arg. until base case reached)
+5. Try to represent the given problem in terms of index.
+6. Do all possible operations on that index according to the problem statement.
+7. To count all possible ways - sum of all stuff.
    To find minimum/maximum - Take Minimum/maximum of all stuff.
 
-# Memoization
+## Print subsequence problem
+### rules of a valid subsequence
+for each subsequence conmbination - order of picked elements(one or more elements) is same as they were in original array(irrespective all elements(contigous) are picked or some are picked(non contigous))
+### approach
+for each element, either we take or not take that element in the current subsequence
+#### pseudo code
+```
+f(index, inputArr, outlist) {
+  if(index >=n) {
+     print(outlist);
+     return;
+  }
+  outlist.add(inputArr[i]);
+  f(index+1,inputArr, outlist);
+  outlist.remove(inputArr[i]);
+  f(index+1,inputArr, outlist);
+```
+
+
+# Memoization (top down)
 	IF BASE CASE ---RETURN ANSWER
 	IF ALREADY COMPUTED - RETURN FROM CACHE
 	RECURSIVELY SOLVE USING SUBPROBLEMS & STORE in dp[] 
 
-# Tabularization
+# Tabulation (bottom up)
 1. DP array init with -1 as values
 2. BASE CASE -- STORE ANSWERS IN dp[]
 3. ITERATE from: index after base case till: n
 4. build dp[i] using previous solved subproblems
 5. return dp[n] 
 
-# space optimized Tabularization 
+# space optimized Tabulation 
     check if can avoid storing all subproblems results
 
 # greedy versus dynamic 
