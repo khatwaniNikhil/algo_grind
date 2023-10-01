@@ -28,30 +28,37 @@ f(index, inputArr, outlist) {
   f(index+1,inputArr, outlist);
 ```
 
+# Dynamic programming
+Overlapping/interdependent sub problems. 
 
-# Memoization (top down)
+## Memoization (Recursion with cache - top down)
 	IF BASE CASE ---RETURN ANSWER
 	IF ALREADY COMPUTED - RETURN FROM CACHE
 	RECURSIVELY SOLVE USING SUBPROBLEMS & STORE in dp[] 
 
-# Tabulation (bottom up)
+## Tabulation (bottom up, iterative)
 1. DP array init with -1 as values
 2. BASE CASE -- STORE ANSWERS IN dp[]
 3. ITERATE from: index after base case till: n
 4. build dp[i] using previous solved subproblems
 5. return dp[n] 
 
-# space optimized Tabulation 
+## space optimized Tabulation 
     check if can avoid storing all subproblems results
 
-# greedy versus dynamic 
+## greedy versus dynamic 
 https://www.baeldung.com/cs/greedy-approach-vs-dynamic-programming
 
-## greedy
-decision is made on the basis of current information only
-need to establish before proceeding that local optimality leads to an optimal global solution
+### greedy
+at each step choose best option with hope of optimal solution at the end.
+suitable for problems where local optimality leads to an optimal global solution.
 
-## Dynamic
+#### Greedy Example
+Say that we are given a set of activities. Each activity has a start and an end time. We’re asked to find the maximum number of activities that don’t intersect, or, in other words, that can be performed by a single person. 
+
+#### The greedy approach is to always choose the activity with the earliest ending time
+
+### Dynamic
 it optimises the recursive backtracking  
 gives optimal solution
 requires more space at times to store the intermediate states in dp[]
