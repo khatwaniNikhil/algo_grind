@@ -11,11 +11,15 @@ https://takeuforward.org/recursion/introduction-to-recursion-understand-recursio
    To find minimum/maximum - Take Minimum/maximum of all stuff.
 
 ## Print subsequence problem
-### rules of a valid subsequence
+https://www.youtube.com/watch?v=AxNNVECce8c&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=6&pp=iAQB
+https://www.youtube.com/watch?v=eQCS_v3bw0Q
+
+### Rules - valid subsequence
 for each subsequence conmbination - order of picked elements(one or more elements) is same as they were in original array(irrespective all elements(contigous) are picked or some are picked(non contigous))
 ### approach
-for each element, either we take or not take that element in the current subsequence
-#### pseudo code
+for each element, either we **take or not take that element** in the current subsequence
+
+#### pseudo code - print all possible sequences
 ```
 f(index, inputArr, outlist) {
   if(index >=n) {
@@ -27,6 +31,71 @@ f(index, inputArr, outlist) {
   outlist.remove(inputArr[i]);
   f(index+1,inputArr, outlist);
 ```
+
+
+#### pseudo code - print all possible sequences with sum k
+```
+f(index, inputArr, outlist, sum, k) {
+  if(index >=n && sum==k) {
+     print(outlist);
+     return;
+  }
+  outlist.add(inputArr[i]);
+  sum += inputArr[i];
+  f(index+1,inputArr, sum, outlist);
+  outlist.remove(inputArr[i]);
+  sum -= inputArr[i];
+  f(index+1,inputArr, sum, outlist);
+```
+
+#### pseudo code - print any one of the possible sequences with sum k
+```
+f(index, inputArr, outlist, sum, k) {
+  if(index >=n) {
+     if(sum==k) {
+        print(outlist);
+        return true;
+     }
+     else 
+       return false;
+ }
+
+outlist.add(inputArr[i]);
+sum += inputArr[i];
+if(f(index+1,inputArr, sum, outlist) == true) {
+    return true;
+}
+outlist.remove(inputArr[i]);
+sum -= inputArr[i];
+if(f(index+1,inputArr, sum, outlist) == true) {
+    return true;
+}
+return false;
+```
+
+#### pseudo code - print count of the possible sequences with sum k
+```
+int f(index, inputArr, outlist, sum, k) {
+  if(index >=n) {
+     if(sum==k) {
+        print(outlist);
+        return 1;
+     }
+     else 
+       return 0;
+ }
+
+outlist.add(inputArr[i]);
+sum += inputArr[i];
+int l = f(index+1,inputArr, sum, outlist);
+
+outlist.remove(inputArr[i]);
+sum -= inputArr[i];
+
+int r = f(index+1,inputArr, sum, outlist)
+return l + r;
+```
+
 
 # Dynamic programming
 Overlapping/interdependent sub problems. 
