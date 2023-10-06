@@ -10,25 +10,6 @@ https://takeuforward.org/recursion/introduction-to-recursion-understand-recursio
 7. To count all possible ways - sum of all stuff.
    To find minimum/maximum - Take Minimum/maximum of all stuff.
 
-## Print subsequence problem
-### rules of a valid subsequence
-for each subsequence conmbination - order of picked elements(one or more elements) is same as they were in original array(irrespective all elements(contigous) are picked or some are picked(non contigous))
-### approach
-for each element, either we take or not take that element in the current subsequence
-#### pseudo code
-```
-f(index, inputArr, outlist) {
-  if(index >=n) {
-     print(outlist);
-     return;
-  }
-  outlist.add(inputArr[i]);
-  f(index+1,inputArr, outlist);
-  outlist.remove(inputArr[i]);
-  f(index+1,inputArr, outlist);
-```
-
-
 # Memoization 
 Top down - focus on main problem and arrive to base case with intermediate results cache. Since all possible subproblems are solved
 once, time complexity is O(N). Extra space for caching leads to space complexity of O(n)
@@ -86,25 +67,26 @@ public class MyClass {
     }
 ```
 
-# space optimized Tabulation 
+#### Space optimized Tabulation 
     check if can avoid storing all subproblems results
 
-# greedy versus dynamic 
+# Greedy versus Dynamic 
 https://www.baeldung.com/cs/greedy-approach-vs-dynamic-programming
 
-## greedy
+#### Greedy
 decision is made on the basis of current information only
 need to establish before proceeding that local optimality leads to an optimal global solution
 
-## Dynamic
+#### Dynamic
 it optimises the recursive backtracking  
 gives optimal solution
 requires more space at times to store the intermediate states in dp[]
 
 # DP Problems
-## 1. stairs climb 
+#### 1. stairs climb 
 https://www.enjoyalgorithms.com/blog/climbing-stairs-problem
-### dp approach - similar to fibbonacci series but after i=3
+
+###### dp approach - similar to fibbonacci series but after i=3
 ```
 dp[0] = 0
 dp[1] = 1
@@ -113,7 +95,7 @@ i>=3 till n-1
 dp[i] = dp[i-1]+ dp[i-2];
 return dp[n-1]
 ```
-### space optimised dp - keep only last two values
+###### space optimised dp - keep only last two values
 ```
 if(n<=2)
      return n;
@@ -130,12 +112,12 @@ return prev;
 } 
 ```
 
-## 2. frog energy spent - frog jump 1 or 2, min energy spent cost to reach destination
+#### 2. frog energy spent - frog jump 1 or 2, min energy spent cost to reach destination
 https://www.codingninjas.com/studio/problems/frog-jump_3621012 
 
-### Greedy not applicable
+###### Greedy not applicable
 local optima does not guarantee global optima(some jumps can be low cost but now restricted on next jumps to take which might increase overall cost of the path)
-#### recursive - refer recursion(with memoziation) tricks first and then later convert to tabulization 
+###### recursive - refer recursion(with memoziation) tricks first and then later convert to tabulization 
 ```
 Try to represent the given problem in terms of index. 
 F(n): min energy spent to reach from step 0 to step n. 
@@ -149,7 +131,7 @@ Take the minimum of all the choices  
 return min(jumpOneCost, jumpTwoCost) recursive to dp  
 ```
 
-#### Recursive + memoization 
+###### Recursive + memoization 
 ```
 int dp[]=new int[n]
 Arrays.fill(dp,-1);
@@ -173,7 +155,7 @@ dp[ind] = Math.min(jumpOneCost, jumpTwoCost) 
 Return dp[n-1]
 ```
 
-#### space optimised dp 
+###### space optimised dp 
 ```
 int n=height.length;
    int prev=0;
@@ -191,7 +173,7 @@ int n=height.length;
 }
 ```
         
-## 3. dynamic-programming-frog-jump-with-k-distances-dp-4
+#### 3. dynamic-programming-frog-jump-with-k-distances-dp-4
 https://takeuforward.org/data-structure/dynamic-programming-frog-jump-with-k-distances-dp-4/
 ```
 class Solution {
@@ -219,7 +201,7 @@ class Solution {
 }
 ```
 
-## 4. climbing-stairs
+#### 4. climbing-stairs
 https://leetcode.com/problems/climbing-stairs/description/
 ```
 class Solution {
@@ -246,7 +228,7 @@ class Solution {
 }
 ```
 
-## 5. https://practice.geeksforgeeks.org/problems/geek-jump/1
+#### 5. https://practice.geeksforgeeks.org/problems/geek-jump/1
 ```
 class Solution{
     public int minimumEnergy(int arr[],int N){
@@ -270,10 +252,24 @@ class Solution{
 }
 ```
 
-##
-Printing Subsequences(contigous as well as non contiguous)
-elements order has to be maintained
-
+#### 6. Print subsequence problem
+###### Rules of a valid subsequence
+for each subsequence conmbination - order of picked elements(one or more elements) is same as they were in original array(irrespective all elements(contigous) are picked or some are picked(non contigous))
+###### approach
+for each element, either we take or not take that element in the current subsequence
+###### pseudo code
+```
+f(index, inputArr, outlist) {
+  if(index >=n) {
+     print(outlist);
+     return;
+  }
+  outlist.add(inputArr[i]);
+  f(index+1,inputArr, outlist);
+  outlist.remove(inputArr[i]);
+  f(index+1,inputArr, outlist);
+```
+```
 public static void main(String[] args) {
     int[] nums = {1,2,3};
     List<List<Integer>> result=new ArrayList<>();
@@ -282,7 +278,8 @@ public static void main(String[] args) {
         System.out.println(subSeq);
     }
 }
-
+```
+```
 public static void printAllSubSequencesInternal(List<List<Integer>> result, int startIndex, int[] arr, List<Integer> currSubSequence) {
     // base case index>=n, return current element
     if(startIndex == arr.length) {
@@ -298,13 +295,13 @@ public static void printAllSubSequencesInternal(List<List<Integer>> result, int 
     printAllSubSequencesInternal(result, startIndex+1, arr, currSubSequence);
 
 }
-Maximum sum of non-adjacent elements
+```
+
+#### 7. Maximum sum of non-adjacent elements
 //base case i==0
 dp[0] = arr[0];
 
 for(int i=1;
-
-
 //pick current elem, then can’t pick adjacent and solve i-2 subproblem
 if(i>1)
 pick = arr[i] + call(i-2)
