@@ -137,44 +137,55 @@ return min(jumpOneCost, jumpTwoCost) recursive to dp
 
 ###### Recursive + memoization 
 ```
-int dp[]=new int[n]
-Arrays.fill(dp,-1);
-dp[0]=0;
-if(dp[n]!=-1) return dp[n];
-jumpTwoCost = Integer.MAX_VALUE;
-jumpOneCost = f(n-1) + abs(h[n-1], h[n]) 
-if n>=2 
-jumpTwoCost  =  f(n-2) + abs(h[n-2], h[n])   
-Take the minimum of all the choices  
-dp[n] = min(jumpOneCost, jumpTwoCost) 
-return dp[n]
-Tabularization
-int dp[]=new int[n]
-Arrays.fill(dp,-1);
-dp[0]=0;
-i>=1 till n-1
-jumpOneCost 
-jumpTwoCost 
-dp[ind] = Math.min(jumpOneCost, jumpTwoCost) 
-Return dp[n-1]
+// 1. problem in terms of index
+// 2. cache intermediate results
+// 3. all operations on index
+static int frogJumpMemoization(int ind,int[] height,int[] dp) {
+        if(ind ==0) return 0;
+        if(dp[ind] !=-1) return dp[ind];
+        int reachIndWithOneJumpCost = frogJumpMemoization(ind-1, height, dp) + Math.abs(height[ind] - height[ind-1]);
+        int reachIndWithTwpoJumpCost = Integer.MAX_VALUE;
+        if(ind >1)
+            reachIndWithTwpoJumpCost = frogJumpMemoization(ind-1, height, dp) + Math.abs(height[ind] - height[ind-1]);             
+        
+        dp[ind] = Math.min(reachIndWithOneJumpCost, reachIndWithTwpoJumpCost);
+        return dp[ind];
+}
+```
+
+###### Tabularization
+```
+static int frogJumpTabulization(int ind,int[] height,int[] cost) {
+        cost[0] = 0;
+        
+        for(int reachIndex=1;reachIndex<=ind;reachIndex++) {
+            int reachIndWithOneJumpCost = cost[reachIndex-1] + Math.abs(height[ind] - height[ind-1]);
+            int reachIndWithTwpoJumpCost = Integer.MAX_VALUE;
+            if(ind >1)
+                reachIndWithTwpoJumpCost = cost[reachIndex-2] + Math.abs(height[ind] - height[ind-2]);  
+            cost[reachIndex] = Math.min(reachIndWithOneJumpCost, reachIndWithTwpoJumpCost);
+        }
+        return dp[ind];
+    }
 ```
 
 ###### space optimised dp 
 ```
-int n=height.length;
-   int prev=0;
-  int prev2=0;
-  for(int i=1;i<n;i++){
-      
-      int jumpTwo = Integer.MAX_VALUE;
-      int jumpOne= prev + Math.abs(height[i]-height[i-1]);
-      if(i>1)
-        jumpTwo = prev2 + Math.abs(height[i]-height[i-2]);
-    
-      int cur_i=Math.min(jumpOne, jumpTwo);
-      prev2=prev;
-      prev=cur_i;
-}
+static int frogJumpTabulization(int ind,int[] height) {
+        int prev  = 0;
+        int prev2 = 0;
+        
+        for(int reachIndex=1;reachIndex<=ind;reachIndex++) {
+            int reachIndWithOneJumpCost = prev + Math.abs(height[ind] - height[ind-1]);
+            int reachIndWithTwpoJumpCost = Integer.MAX_VALUE;
+            if(ind >1)
+                reachIndWithTwpoJumpCost = prev2 + Math.abs(height[ind] - height[ind-2]);  
+            int current = Math.min(reachIndWithOneJumpCost, reachIndWithTwpoJumpCost);
+            prev2 = prev;
+            prev = current;
+        }
+        return prev;
+    }
 ```
         
 #### 3. dynamic-programming-frog-jump-with-k-distances-dp-4
