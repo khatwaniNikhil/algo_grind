@@ -1,5 +1,9 @@
-# Recursion
+# References
+https://www.enjoyalgorithms.com/blog/top-down-memoization-vs-bottom-up-tabulation
 https://takeuforward.org/recursion/introduction-to-recursion-understand-recursion-by-printing-something-n-times/
+https://takeuforward.org/data-structure/dynamic-programming-introduction/
+
+# Recursion
 1. function calls itself, can be described pictorically in tree format known as recursion tree.
 2. base condition leads to stack unwinding and return to previous call.
 3. can be implemented as
