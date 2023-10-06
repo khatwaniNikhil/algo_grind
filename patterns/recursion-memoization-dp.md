@@ -29,17 +29,62 @@ f(index, inputArr, outlist) {
 ```
 
 
-# Memoization (top down)
-	IF BASE CASE ---RETURN ANSWER
-	IF ALREADY COMPUTED - RETURN FROM CACHE
-	RECURSIVELY SOLVE USING SUBPROBLEMS & STORE in dp[] 
+# Memoization 
+Top down - focus on main problem and arrive to base case with intermediate results cache. Since all possible subproblems are solved
+once, time complexity is O(N). Extra space for caching leads to space complexity of O(n)
+![1 rCch4Ju3PcPPMpvFireFyQ](https://github.com/khatwaniNikhil/ds_algo/assets/3686308/22106184-c851-4dcf-8c38-8909a2a8e98b)
 
-# Tabulation (bottom up)
+IF BASE CASE ---RETURN ANSWER
+IF ALREADY COMPUTED - RETURN FROM CACHE
+RECURSIVELY SOLVE USING SUBPROBLEMS & STORE in dp[] 
+
+```
+public class MyClass {
+    public static void main(String args[]) {
+      int n =6;
+      int dp[] = new int[n+1];
+      Arrays.fill(dp, -1);
+      System.out.println(fibonacciMemoization(n, dp));
+    }
+    
+    static int fibonacciMemoization(int n, int[] dp) {
+        if(n<=1) return n;
+        if(dp[n] !=-1)
+            return dp[n];
+        dp[n] = fibonacciMemoization(n-1, dp) + fibonacciMemoization(n-2, dp);
+        return dp[n];
+    }
+}
+```
+   	
+# Tabulation 
+Bottom up - iterative, loop over index and build over existing solved subproblems
+![1 9YUE1V0fYhFujaXEcmX3wg](https://github.com/khatwaniNikhil/ds_algo/assets/3686308/c78ebf3a-b0a5-4ca1-9d02-cfc24514f513)
+
 1. DP array init with -1 as values
 2. BASE CASE -- STORE ANSWERS IN dp[]
 3. ITERATE from: index after base case till: n
 4. build dp[i] using previous solved subproblems
-5. return dp[n] 
+5. return dp[n]
+
+```
+public class MyClass {
+    public static void main(String args[]) {
+      int n =6;
+      int dp[] = new int[n+1];
+      Arrays.fill(dp, -1);
+      System.out.println(fibonacciTabulation(n, dp));
+    }
+    
+    static int fibonacciTabulation(int n, int[] dp) {
+        dp[0] = 0;
+        dp[1] = 1;
+        for(int i=2;i<=n;i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+```
 
 # space optimized Tabulation 
     check if can avoid storing all subproblems results
