@@ -189,7 +189,7 @@ class Solution {
 	
 		for(int jumpSteps=1; jumpSteps<=K; jumpSteps++) {
 			
-			if(i-jumpSteps>0){
+			if(i-jumpSteps>=0){
 				 int jumpCost = dp[i-jumpSteps] + Math.abs(arr[i], arr[i-jumpSteps]);
 				 minEnergy  = Math.min(minEnergy, jumpCost);
 			}
@@ -202,75 +202,11 @@ class Solution {
 
 }
 ```
-
-#### 4. climbing-stairs
-https://leetcode.com/problems/climbing-stairs/description/
-```
-class Solution {
-    public int climbStairs(int n) {
-        // 1 <= n <= 45
-        // dp[n] = dp[n-1] + dp[n-2]
-        // base cases:
-        // dp[0] = 0
-        // dp[1] = 1
-        // dp[2] = 2
-        if(n<=2)
-            return n;
-        else {
-            int prev = 2;
-            int prev2 = 1;
-            for(int i=3;i<=n;i++){
-                int cur_i = prev + prev2;
-                prev2 = prev;
-                prev = cur_i;
-            }
-            return prev;
-        }
-    }
-}
-```
-
-#### 5. https://practice.geeksforgeeks.org/problems/geek-jump/1
-```
-class Solution{
-    public int minimumEnergy(int arr[],int N){
-        int dp[] = new int[N];
-        Arrays.fill(dp, -1);
-        dp[0] = 0;
-        
-        for(int i=1;i<N;i++) {
-            int jumpTwoCost = Integer.MAX_VALUE;
-            //jumpOneCost
-            int jumpOneCost = dp[i-1] + Math.abs(arr[i] - arr[i-1]);    
-            
-            //jumpTwoCost
-            if(i>=2) {
-                jumpTwoCost = dp[i-2] + Math.abs(arr[i] - arr[i-2]);    
-            }
-            dp[i] = Math.min(jumpOneCost, jumpTwoCost);
-        }
-        return dp[N-1];
-    }
-}
-```
-
-#### 6. Print subsequence problem
+#### 4. Print subsequence problem
 ###### Rules of a valid subsequence
 for each subsequence conmbination - order of picked elements(one or more elements) is same as they were in original array(irrespective all elements(contigous) are picked or some are picked(non contigous))
 ###### approach
 for each element, either we take or not take that element in the current subsequence
-###### pseudo code
-```
-f(index, inputArr, outlist) {
-  if(index >=n) {
-     print(outlist);
-     return;
-  }
-  outlist.add(inputArr[i]);
-  f(index+1,inputArr, outlist);
-  outlist.remove(inputArr[i]);
-  f(index+1,inputArr, outlist);
-```
 ```
 public static void main(String[] args) {
     int[] nums = {1,2,3};
@@ -288,18 +224,18 @@ public static void printAllSubSequencesInternal(List<List<Integer>> result, int 
         result.add(new ArrayList<>(currSubSequence));
         return;
     }
-    // // pick current and then solve subproblems
+    // pick current and then solve subproblems
     currSubSequence.add(arr[startIndex]);
     printAllSubSequencesInternal(result, startIndex+1, arr, currSubSequence);
 
-    // // not pick current and then solve subproblems
+    // not pick current and then solve subproblems
     currSubSequence.remove(currSubSequence.size()-1);
     printAllSubSequencesInternal(result, startIndex+1, arr, currSubSequence);
 
 }
 ```
 
-#### 7. Maximum sum of non-adjacent elements
+#### 5. Maximum sum of non-adjacent elements
 //base case i==0
 dp[0] = arr[0];
 
