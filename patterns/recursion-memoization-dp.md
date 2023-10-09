@@ -121,21 +121,8 @@ https://www.codingninjas.com/studio/problems/frog-jump_3621012
 
 ###### Greedy not applicable
 local optima does not guarantee global optima(some jumps can be low cost but now restricted on next jumps to take which might increase overall cost of the path)
-###### recursive - refer recursion(with memoziation) tricks first and then later convert to tabulization 
-```
-Try to represent the given problem in terms of index. 
-F(n): min energy spent to reach from step 0 to step n. 
-F(0) = 0 
-Do all possible operations on that index according to the problem statement. 
-if (n==0) return 0 
-jumpOneCost = f(n-1) + abs(h[n-1], h[n]) 
-if n>=2 
-jumpTwoCost  =  f(n-2) + abs(h[n-2], h[n])   
-Take the minimum of all the choices  
-return min(jumpOneCost, jumpTwoCost) recursive to dp  
-```
-
-###### Recursive + memoization 
+ 
+ ###### Recursive + memoization 
 ```
 // 1. problem in terms of index
 // 2. cache intermediate results
