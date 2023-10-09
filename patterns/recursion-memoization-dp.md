@@ -1,7 +1,7 @@
 # References
-https://www.enjoyalgorithms.com/blog/top-down-memoization-vs-bottom-up-tabulation
-https://takeuforward.org/recursion/introduction-to-recursion-understand-recursion-by-printing-something-n-times/
-https://takeuforward.org/data-structure/dynamic-programming-introduction/
+1. https://www.enjoyalgorithms.com/blog/top-down-memoization-vs-bottom-up-tabulation
+2. https://takeuforward.org/recursion/introduction-to-recursion-understand-recursion-by-printing-something-n-times/
+3. https://takeuforward.org/data-structure/dynamic-programming-introduction/
 
 # Recursion
 1. function calls itself, can be described pictorically in tree format known as recursion tree.
@@ -236,25 +236,19 @@ public static void printAllSubSequencesInternal(List<List<Integer>> result, int 
 ```
 
 #### 5. Maximum sum of non-adjacent elements
-//base case i==0
-dp[0] = arr[0];
+https://leetcode.com/problems/house-robber
 
-for(int i=1;
-//pick current elem, then can’t pick adjacent and solve i-2 subproblem
-if(i>1)
-pick = arr[i] + call(i-2)
-
-// do not pick current elem, solve i-1 subproblem
-not_pick = 0+call(i-1)
-
-return max(pick, not_pick)
-
-
-
-
-
-
-
-
-
-
+```
+public int rob(int[] nums) {
+        int dp[] = new int[nums.length];
+        dp[0] = nums[0];
+        if(nums.length>=2) {
+            dp[1] = Math.max(nums[0], nums[1]);
+            for(int i=2;i<nums.length; i++) {
+                dp[i] = Math.max(dp[i-1], dp[i-2]+nums[i]);
+            }    
+        }
+        return dp[nums.length-1];
+        
+    }
+```
