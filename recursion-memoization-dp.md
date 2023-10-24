@@ -304,6 +304,7 @@ class Solution{
 ## House robber
 https://leetcode.com/problems/house-robber/
 
+### DP
 ```
 public int rob(int[] nums) {
         int dp[] = new int[nums.length];
@@ -316,6 +317,24 @@ public int rob(int[] nums) {
         }
         return dp[nums.length-1];
 }     
+```
+
+### Optimised DP
+```
+public int rob(int[] nums) {
+        int dp_prev_prev = nums[0];
+        if(nums.length>=2) {
+            int dp_prev = Math.max(nums[0], nums[1]);
+            for(int i=2;i<nums.length; i++) {
+                int dp_current = Math.max(dp_prev, dp_prev_prev+nums[i]);
+                dp_prev_prev = dp_prev;
+		        dp_prev = dp_current;
+            }
+            return dp_prev;
+        }
+        else
+            return dp_prev_prev;
+    }
 ```
 
 
