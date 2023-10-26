@@ -162,6 +162,7 @@ return prev;
 ```
 
 ## 2. frog energy spent - frog jump 1 or 2, min energy spent cost to reach destination
+frog wants to climb from the 0th stair to the (N-1)th stair. At a time the frog can climb either one or two steps. A height[N] array is also given. Whenever the frog jumps from a stair i to stair j, the energy consumed in the jump is abs(height[i]- height[j]), where abs() means the absolute difference. We need to return the minimum energy that can be used by the frog to jump from stair 0 to stair N-1.
 https://www.codingninjas.com/studio/problems/frog-jump_3621012 
 
 ### Greedy not applicable
@@ -182,26 +183,37 @@ return min(jumpOneCost, jumpTwoCost) recursive to dp
 
 #### Recursive + memoization 
 ```
-int dp[]=new int[n]
-Arrays.fill(dp,-1);
-dp[0]=0;
-if(dp[n]!=-1) return dp[n];
-jumpTwoCost = Integer.MAX_VALUE;
-jumpOneCost = f(n-1) + abs(h[n-1], h[n]) 
+int frogJump(int n, int heights[]) {
+  int dp[]=new int[n]
+  Arrays.fill(dp,-1);
+  dp[0]=0;
+  if(dp[n]!=-1)
+    return dp[n];
+  jumpTwoCost = Integer.MAX_VALUE;
+  jumpOneCost = frogJump(n-1m heights) + abs(h[n-1], h[n]) 
+
+}
 if n>=2 
-jumpTwoCost  =  f(n-2) + abs(h[n-2], h[n])   
+  jumpTwoCost  =  f(n-2) + abs(h[n-2], h[n])   
 Take the minimum of all the choices  
 dp[n] = min(jumpOneCost, jumpTwoCost) 
 return dp[n]
+```
+
 Tabularization
-int dp[]=new int[n]
-Arrays.fill(dp,-1);
-dp[0]=0;
-i>=1 till n-1
-jumpOneCost 
-jumpTwoCost 
-dp[ind] = Math.min(jumpOneCost, jumpTwoCost) 
-Return dp[n-1]
+```
+public static int frogJump(int n, int heights[]) {
+        int[] totalEnergySpentToReachIndex =new int[n];
+        Arrays.fill(totalEnergySpentToReachIndex,-1);
+        totalEnergySpentToReachIndex[0]=0;
+        totalEnergySpentToReachIndex[1] = Math.abs(heights[1]-heights[0]);
+        for(int i=2;i<=n-1;i++) {
+	        int costToReachIthIndexWithOneJump = totalEnergySpentToReachIndex[i-1] + Math.abs(heights[i]-heights[i-1]);
+	        int costToReachIthIndexWithTwoJump =  totalEnergySpentToReachIndex[i-2] + Math.abs(heights[i]-heights[i-2]);
+	        totalEnergySpentToReachIndex[i] = Math.min(costToReachIthIndexWithOneJump, costToReachIthIndexWithTwoJump);
+        }
+        return totalEnergySpentToReachIndex[n-1];
+    }
 ```
 
 #### space optimised dp 
