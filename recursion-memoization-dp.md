@@ -200,7 +200,7 @@ dp[n] = min(jumpOneCost, jumpTwoCost)
 return dp[n]
 ```
 
-Tabularization
+#### Tabularization
 ```
 public static int frogJump(int n, int heights[]) {
         int[] totalEnergySpentToReachIndex =new int[n];
