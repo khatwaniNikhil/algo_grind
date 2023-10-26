@@ -218,20 +218,18 @@ public static int frogJump(int n, int heights[]) {
 
 #### space optimised dp 
 ```
-int n=height.length;
-   int prev=0;
-  int prev2=0;
-  for(int i=1;i<n;i++){
-      
-      int jumpTwo = Integer.MAX_VALUE;
-      int jumpOne= prev + Math.abs(height[i]-height[i-1]);
-      if(i>1)
-        jumpTwo = prev2 + Math.abs(height[i]-height[i-2]);
-    
-      int cur_i=Math.min(jumpOne, jumpTwo);
-      prev2=prev;
-      prev=cur_i;
-}
+public static int frogJump(int n, int heights[]) {
+        int prev2=0;
+        int prev1 = Math.abs(heights[1]-heights[0]);
+        for(int i=2;i<=n-1;i++) {
+	        int costToReachIthIndexWithOneJump = prev1 + Math.abs(heights[i]-heights[i-1]);
+	        int costToReachIthIndexWithTwoJump =  prev2 + Math.abs(heights[i]-heights[i-2]);
+	        int current = Math.min(costToReachIthIndexWithOneJump, costToReachIthIndexWithTwoJump);
+            prev2 = prev1;
+            prev1 = current;
+        }
+        return prev1;
+    }
 ```
         
 ## 3. dynamic-programming-frog-jump-with-k-distances-dp-4
