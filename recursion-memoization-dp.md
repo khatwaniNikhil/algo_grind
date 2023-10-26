@@ -287,31 +287,7 @@ class Solution {
 }
 ```
 
-## 5. https://practice.geeksforgeeks.org/problems/geek-jump/1
-```
-class Solution{
-    public int minimumEnergy(int arr[],int N){
-        int dp[] = new int[N];
-        Arrays.fill(dp, -1);
-        dp[0] = 0;
-        
-        for(int i=1;i<N;i++) {
-            int jumpTwoCost = Integer.MAX_VALUE;
-            //jumpOneCost
-            int jumpOneCost = dp[i-1] + Math.abs(arr[i] - arr[i-1]);    
-            
-            //jumpTwoCost
-            if(i>=2) {
-                jumpTwoCost = dp[i-2] + Math.abs(arr[i] - arr[i-2]);    
-            }
-            dp[i] = Math.min(jumpOneCost, jumpTwoCost);
-        }
-        return dp[N-1];
-    }
-}
-```
-
-## House robber
+## 6. House robber
 https://leetcode.com/problems/house-robber/
 
 ### DP
