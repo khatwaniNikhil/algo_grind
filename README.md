@@ -7,6 +7,9 @@ https://github.com/khatwaniNikhil/ds_algo/blob/main/recursion-memoization-dp.md
 #### 2. Sliding window
 https://github.com/khatwaniNikhil/ds_algo/blob/main/patterns/sliding_window_pattern.md
 
+#### 3. Binary Search
+https://github.com/khatwaniNikhil/ds_algo/blob/main/binarysearch.md
+
 # Other problems
 
 #### 1. FileDirectory-DesignChallenge(TODO)
